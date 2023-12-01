@@ -1,0 +1,55 @@
+<!-- <p>user works!</p> -->
+
+<table class="table table-bordered">
+  <tbody>
+    <tr>
+      <td colspan="4">
+        <!-- <p>User:</p> -->
+        <p>USER</p>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4">
+        <table class="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Name</th>
+              <th scope="col">Username</th>
+              <th scope="col">Joined Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of userDetails" (click)="setSelectedUser(user)"
+              [ngClass]="user.id === userDetail.id ? 'table-primary' : ''">
+              <td>{{ user.id }}</td>
+              <td>{{ user.name }}</td>
+              <td>{{ user.username }}</td>
+              <td>{{ user.joinedAt }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4">
+        <p>ADDRESS:</p>
+      </td>
+    </tr>
+    <tr *ngFor="let address of userDetail.addressList">
+      <td>Address</td>
+      <td>:</td>
+      <td colspan="2">{{ address.address }}</td>
+    </tr>
+    <tr *ngFor="let address of userDetail.addressList">
+      <td>City</td>
+      <td>:</td>
+      <td colspan="2">{{ address.city }}</td>
+    </tr>
+    <tr *ngFor="let address of userDetail.addressList">
+      <td>Zipcode</td>
+      <td>:</td>
+      <td colspan="2">{{ address.zipcode }}</td>
+    </tr>
+  </tbody>
+</table>
