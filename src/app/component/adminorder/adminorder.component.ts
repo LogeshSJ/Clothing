@@ -12,10 +12,12 @@ export class AdminOrderComponent implements OnInit  {
   orders: Order[] = [];
   userOrders: Order[] = [];
   orderStatusList: Orderstatus[] = [];
+  status:Orderstatus[]=[]
  
   userId: number | undefined;
   orderId: number | undefined;
   statusId: number | undefined;
+  selectedOrder: Order | null = null;
  
   constructor(private adminOrderService: AdminorderService) {}
  
@@ -52,5 +54,8 @@ export class AdminOrderComponent implements OnInit  {
         // Handle the response or update UI as needed
       });
     }
+  }
+  selectUserOrder(order: Order): void {
+    this.selectedOrder = order;
   }
 }

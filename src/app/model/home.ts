@@ -1,5 +1,5 @@
 export interface Home {
-  id?: number;
+  id: number;
   title: String;
   description: String;
   price: number;

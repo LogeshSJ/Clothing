@@ -4,7 +4,7 @@
   --primary-50: rgb(235, 243, 243);
   --primary-100: #FBF8BE;
   --primary-300: #234E70;
-  --primary-500: #234E70;
+  --primary-500: #234f70;
   --primary-600: #234E70;
   --primary-700: #b45309;
   --primary-900: #78350f;
@@ -186,7 +186,7 @@ body {
   background-repeat: no-repeat;
 }
 .regpage{
-  /* background-image: url("/assets/images/bg.jpg"); */
+  background-image: url("/assets/images/bg6.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

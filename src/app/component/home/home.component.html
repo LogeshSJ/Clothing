@@ -172,19 +172,24 @@
     </div>
   </div> -->
 
+<br />
+<br />
+<br />
+
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-4 product-card" *ngFor="let home of homes">
       <div class="card">
         <img
-          src="/assets/images/jeans.jpg"
+          src="/assets/images/bg2.jpg"
           alt="Product Image"
           class="card-img-top"
         />
         <div class="card-body">
           <h5 class="card-title">{{ home.title }}</h5>
           <p class="card-text">₹ {{ home.price }}</p>
-          <button class="btn btn-warning btn-sm add-to-cart" routerLink="/cart">
+          
+          <button class="btn btn-warning btn-sm add-to-cart" routerLink="/cart" (click)="addToCart(home)" >
             Add to Cart
           </button>
         </div>

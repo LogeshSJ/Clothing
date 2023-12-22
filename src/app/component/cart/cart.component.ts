@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppResponse } from 'src/app/model/appResponse';
 import { Cart } from 'src/app/model/cart';
+import { Home } from 'src/app/model/home';
 import { Order } from 'src/app/model/order';
 import { UserDetail } from 'src/app/model/user-detail';
 import { CartService } from 'src/app/service/cart.service';
@@ -12,13 +13,12 @@ import { UserService } from 'src/app/service/user.service';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.css']
+  styleUrls: ['./cart.component.css'],
 })
 // export class CartComponent implements OnInit {
 //   // cartCloths: Cart[] = [];
 //   // constructor(private cartService: CartService) {}
- 
- 
+
 //   // ngOnInit(): void {
 //   //   this.cartService.getAllCart().subscribe(
 //   //     (response: AppResponse) => {
@@ -46,28 +46,28 @@ import { UserService } from 'src/app/service/user.service';
 //       private storageService: StorageService,
 //       private router: Router
 //     ) {}
-   
+
 //     ngOnInit(): void {
-    
+
 //       this.getAllCart();
 //     }
-   
-//     getAllCart() {
-//       let user = this.storageService.getLoggedInUser();
-//       this.cartService.getAllCart().subscribe(
-//         (response: AppResponse) => {
-//           this.cartCloths = response.data;
-//         },
-//         (err) => {
-//           console.error('An error occurred:', err);
-//         }
-//       );
-//     }
-   
+
+    // getAllCart() {
+    //   let user = this.storageService.getLoggedInUser();
+    //   this.cartService.getAllCart().subscribe(
+    //     (response: AppResponse) => {
+    //       this.cartCloths = response.data;
+    //     },
+    //     (err) => {
+    //       console.error('An error occurred:', err);
+    //     }
+    //   );
+    // }
+
 //     // onSubmit(categoryForm: any) {
 //     //   this.cartService
 //     //     .postCart({
-   
+
 //     //     })
 //     //     .subscribe({
 //     //       next: (response: any) => {
@@ -83,7 +83,7 @@ import { UserService } from 'src/app/service/user.service';
 //     //       },
 //     //     });
 //     // }
-   
+
 //     deleteCart(cart: Cart) {
 //       if (cart.id !== undefined) {
 //         this.cartService.deleteCart().subscribe({
@@ -96,26 +96,26 @@ import { UserService } from 'src/app/service/user.service';
 //         });
 //       }
 //     }
-   
+
 //     someValue: any;
 //     productsForOrder: any[] = [];
 //     cart: any = {
 //       product: {} // Define your product object here
 //     };
-   
+
 //     // handleCheckboxClick(event:any,product: any) {
 //     //   console.log("productsss",product);
-   
+
 //     //   if (event.target.checked) {
 //     //     this.productsForOrder.push(product);
 //     //     this.cartService.handleCheckboxClick(product);
 //     //     console.log("this.productsfororder : " , this.productsForOrder);
-   
+
 //     //     // this.router.navigate(['/address']);
 //     //   } else {
 //     //     for(let prod of this.productsForOrder) {
 //     //       if(prod.id === product.id) {
-   
+
 //     //       }
 //     //     }
 //     //     this.productsForOrder = this.productsForOrder.filter(item => item.id !== product.id);
@@ -123,10 +123,8 @@ import { UserService } from 'src/app/service/user.service';
 //     //     // alert('Please check the checkbox to proceed.');
 //     //   }
 //     // }
-   
-   
+
 //   }
-  
 export class CartComponent implements OnInit {
   error: string = '';
   cartCloths: Cart[] = [];
@@ -137,17 +135,21 @@ export class CartComponent implements OnInit {
     private cartService: CartService,
     private orderService: OrderService,
     private storageService: StorageService,
-    private userService: UserService,
+    private userService: UserService
   ) {}
- 
+
   ngOnInit(): void {
     this.loadCart();
   }
- 
+
   loadCart() {
     this.cartService.getAllCart().subscribe({
       next: (response: any) => {
         this.cartCloths = response.data;
+        console.log(response.data);
+        
+        // console.log(this.cartCloths);
+        
         this.isCartEmpty = this.cartCloths.length === 0;
       },
       error: (err) => {
@@ -156,25 +158,28 @@ export class CartComponent implements OnInit {
       },
     });
   }
+
   loadUserDetails() {
     const userId = this.storageService.getLoggedInUser().id;
- 
+
     this.userService.getUserDetails().subscribe(
       (response: AppResponse) => {
         if (response && response.data && Array.isArray(response.data)) {
-          const userWithAddress = response.data.find(user => user.addressList && user.addressList.length > 0);
- 
+          const userWithAddress = response.data.find(
+            (user) => user.addressList && user.addressList.length > 0
+          );
+
           if (userWithAddress) {
             const firstAddress = userWithAddress.addressList[0].id;
             console.log(firstAddress);
- 
+
             const loggedInUser = this.storageService.getLoggedInUser();
             if (loggedInUser) {
               const order = {
                 userId: loggedInUser.id,
                 addressId: firstAddress,
               };
- 
+
               this.orderService.postOrder(order).subscribe({
                 next: (response: any) => {
                   this.currentOrder = response.data;
@@ -187,7 +192,9 @@ export class CartComponent implements OnInit {
               });
             }
           } else {
-            console.error('No user with a valid addressList found in the API response.');
+            console.error(
+              'No user with a valid addressList found in the API response.'
+            );
           }
         } else {
           console.error('Invalid API response format:', response);
@@ -198,20 +205,19 @@ export class CartComponent implements OnInit {
       }
     );
   }
- 
- 
+
   checkout() {
-    console.log("got In");
+    console.log('got In');
     const loggedInUser = this.storageService.getLoggedInUser();
- 
+
     if (loggedInUser) {
       this.loadUserDetails();
     } else {
       console.error('User not logged in.');
-      console.log("nope");
+      console.log('nope');
     }
   }
- 
+
   deleteCart(id: number | undefined) {
     if (id != undefined) {
       this.cartService.deleteCart().subscribe({
@@ -224,6 +230,5 @@ export class CartComponent implements OnInit {
       });
     }
   }
-}
   
-
+}

@@ -4,5 +4,7 @@ export interface Cart {
     id: number;
     cloth:Cloth;
     count: number;
-    price?: number;
+    price: number;
+    userId:number;
+     clothId:string
   }

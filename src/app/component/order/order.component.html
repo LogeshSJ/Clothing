@@ -114,7 +114,7 @@
     </div>
   </div> -->
 
-  <div class="container my-5">
+  <!-- <div class="container my-5">
     <p class="fs-1">My Orders</p>
   <div class="pt-5">
     <div class="container">
@@ -133,7 +133,7 @@
             <td>polo</td>
             <td>Shirt</td>
             <td>1000</td>
-            <td>Delivered</td>
+            <td>Pending</td>
           </tr>
           <tr>
             <td>4</td>
@@ -166,7 +166,7 @@
       </table>
     </div>
   </div>
-  </div>
+  </div> -->
 
 
   <!-- <div class="container">
@@ -201,3 +201,38 @@
    
     <a routerLink="/" class="btn btn-success" id="back-button">Go Back</a>
   </div> -->
+
+
+  <div class="container my-5">
+    <div class="container py-5 h-100">
+      <div class="row d-flex align-items-center justify-content-center h-100">
+        <div class="col-6">
+          <h1>Orders</h1>
+          <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+              <tr>
+                <th scope="col">Order ID</th>
+                <!-- <th scope="col">Address</th>
+                <th scope="col">City</th>
+                <th scope="col">Zipcode</th> -->
+                <th scope="col">Order Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="let order of orderItems"
+                [ngClass]="order.id ? 'table-info' : ''"
+              >
+                <td>{{ order.id }}</td>
+                <!-- <td>{{ order.address.address }}</td>
+                <td>{{ order.address.city }}</td>
+                <td>{{ order.address.zipcode }}</td> -->
+                <td>{{ order.orderStatus }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  

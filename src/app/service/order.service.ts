@@ -14,8 +14,8 @@ export class OrderService {
     return this.http.post<AppResponse>(`${urlEndpoint.baseUrl}/order`,data);
   }
 
-  getAllOrders(): Observable<AppResponse> {
-    let userId=1;
+  getAllOrders(userId:number): Observable<AppResponse> {
+    // let userId=1;
     return this.http.get<AppResponse>(`${urlEndpoint.baseUrl}/order/${userId}`);
   }
   
