@@ -52,9 +52,9 @@ export class CartService {
     return this.http.get<AppResponse>(`${urlEndpoint.baseUrl}/cart/${userId}`);
   }
 
-  deleteCart(): Observable<AppResponse> {
-    let userId = 1;
-    return this.http.delete<AppResponse>(`${urlEndpoint.baseUrl}/cart/`);
+  deleteCart(userId:number,clothId:number): Observable<AppResponse> {
+ 
+    return this.http.delete<AppResponse>(`${urlEndpoint.baseUrl}/cart/${userId}/${clothId}`);
   }
   // postCart(cart: Cart): Observable<AppResponse> {
   //   return this.http.post<AppResponse>(`${urlEndpoint.baseUrl}/cart`, cart);
@@ -103,5 +103,5 @@ export class CartService {
       `${urlEndpoint.baseUrl}/cart`,
       send
     );
-  }
+  } 
 }

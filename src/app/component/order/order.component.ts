@@ -10,6 +10,8 @@ import { StorageService } from 'src/app/service/storage.service';
   styleUrls: ['./order.component.css']
 })
 export class OrderComponent implements OnInit {
+
+  
   constructor(private orderService: OrderService,private storageService:StorageService) {}
  
   orderItems: Order[] = [];

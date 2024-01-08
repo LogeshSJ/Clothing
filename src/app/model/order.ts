@@ -10,4 +10,5 @@ export interface Order {
   cloth: Cloth;
   orderStatus: Orderstatus;
   userId?: number;
+  // orderedClothList: Cloth[];
 }

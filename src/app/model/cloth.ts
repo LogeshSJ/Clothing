@@ -5,7 +5,7 @@ export interface Cloth {
   title: string;
   description: string;
   price: number;
-  category_id?: number;
+  categoryId: number;
   count?: number;
   category?: Category;
 }

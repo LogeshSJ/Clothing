@@ -175,21 +175,73 @@
 <br />
 <br />
 <br />
+<h1 *ngIf="isUserLoggedIn()" class="welcome-message mx-5">
+  Welcome <span class="text-primary">{{ getLoggedInUserName() }}</span></h1>
+<div class="input mb-2 d-flex justify-content-center mt-5 align-items-center">
+  <input
+    type="text"
+    class="border border-radius-5 py-2"
+    placeholder="   Search"
+    name="searchQuery"
+    [(ngModel)]="searchQuery"
+    style="
+      width: 550px;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    "
+  />
+  <button
+    class="btn border border-radius-5 ms-1"
+    style="border-top-left-radius: 0; border-bottom-left-radius: 0"
+    (click)="onSearch()"
+  >
+    <i class="fas fa-search fa-1x"></i>
+  </button>
+</div>
+
+  <div class="btn-group sortbtn mb-5">
+    <button
+      class="btn btn-primary dropdown-toggle"
+      type="button"
+      data-bs-toggle="dropdown"
+      aria-haspopup="true"
+      aria-expanded="false"  
+    >
+      Sort by Price
+    </button>
+    <div class="dropdown-menu">
+      <button class="dropdown-item" (click)="sortProductsLowToHigh()">
+        Low to High
+      </button>
+      <button class="dropdown-item" (click)="sortProductsHighToLow()">
+        High to Low
+      </button>
+    </div>
+  </div>
+
+<!-- <img src="/assets/images/home bg.jpg" alt="Background Image" class="bg-img" /> -->
 
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-4 product-card" *ngFor="let home of homes">
       <div class="card">
         <img
-          src="/assets/images/bg2.jpg"
+          style="height: 300px; object-fit: contain"
+          src="{{ 'http://localhost:8080/api/cloth/downloadFile/' + home.id }}"
           alt="Product Image"
           class="card-img-top"
         />
         <div class="card-body">
           <h5 class="card-title">{{ home.title }}</h5>
-          <p class="card-text">₹ {{ home.price }}</p>
-          
-          <button class="btn btn-warning btn-sm add-to-cart" routerLink="/cart" (click)="addToCart(home)" >
+          <p class="discount-price">
+            ₹ {{ home.price }} <span class="original-price"> 5,990</span>
+          </p>
+
+          <button
+            class="btn btn-warning btn-sm add-to-cart"
+            routerLink="/cart"
+            (click)="addToCart(home)"
+          >
             Add to Cart
           </button>
         </div>

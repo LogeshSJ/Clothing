@@ -1,10 +1,10 @@
-import { Cloth } from "./cloth"
+import { Cloth } from './cloth';
 
 export interface Cart {
-    id: number;
-    cloth:Cloth;
-    count: number;
-    price: number;
-    userId:number;
-     clothId:string
-  }
+  id?: number;
+  cloth: Cloth;
+  count: number;
+  price: number;
+  userId?: number;
+  clothId?: number;
+}

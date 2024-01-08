@@ -84,7 +84,12 @@ export class AdmincategoryComponent implements OnInit {
   }
  
   onEdit(category: Category) {
+
     this.categoryModel = { ...category };
+    console.log(this.categoryModel);
+    console.log(category);
+    
+    
   }
 }
 

@@ -20,6 +20,7 @@ import { AdmincategoryComponent } from './component/admin/admincategory/admincat
 import { AddressComponent } from './component/address/address.component';
 import { UserComponent } from './component/admin/user/user.component';
 import { AdminOrderComponent } from './component/adminorder/adminorder.component';
+import { DashboardComponent } from './component/admin/dashboard/dashboard.component';
 
 
 export function playerFactory() {
@@ -38,7 +39,8 @@ export function playerFactory() {
     AdmincategoryComponent,
     AddressComponent,
     UserComponent,
-    AdminOrderComponent
+    AdminOrderComponent,
+    DashboardComponent
    
   ],
   imports: [

@@ -1,11 +1,11 @@
 <!-- <p>user works!</p> -->
 
-<table class="table table-bordered">
+<!-- <table class="table table-bordered">
   <tbody>
     <tr>
-      <td colspan="4">
+      <td colspan="4"> -->
         <!-- <p>User:</p> -->
-        <p>USER</p>
+        <!-- <p>USER</p>
       </td>
     </tr>
     <tr>
@@ -23,9 +23,9 @@
               [ngClass]="user.id === userDetail.id ? 'table-primary' : ''">
               <td>{{ user.id }}</td>
               <td>{{ user.name }}</td>
-              <td>{{ user.username }}</td>
+              <td>{{ user.username }}</td> -->
               <!-- <td>{{ user.joinedAt }}</td> -->
-            </tr>
+            <!-- </tr>
           </tbody>
         </table>
       </td>
@@ -51,4 +51,60 @@
       <td colspan="2">{{ address.zipcode }}</td>
     </tr>
   </tbody>
-</table>
+</table> -->
+
+<div class="container">
+  <h2>User Details</h2>
+  <div class="table-responsive">
+    <table class="table user-details-table">
+      <tbody>
+        <tr>
+          <td colspan="4">
+            <p class="user-title">USER DETAILS</p>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="4">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">Id</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Username</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let user of userDetails" (click)="setSelectedUser(user)" [ngClass]="user.id === userDetail.id ? 'table-primary' : ''">
+                  <td>{{ user.id }}</td>
+                  <td>{{ user.name }}</td>
+                  <td>{{ user.username }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="4">
+            <p class="address-title">ADDRESS:</p>
+          </td>
+        </tr>
+        <tr *ngFor="let address of userDetail.addressList">
+          <td>Address</td>
+          <td>:</td>
+          <td colspan="2">{{ address.address }}</td>
+        </tr>
+        <tr *ngFor="let address of userDetail.addressList">
+          <td>City</td>
+          <td>:</td>
+          <td colspan="2">{{ address.city }}</td>
+        </tr>
+        <tr *ngFor="let address of userDetail.addressList">
+          <td>Zipcode</td>
+          <td>:</td>
+          <td colspan="2">{{ address.zipcode }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

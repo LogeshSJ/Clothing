@@ -18,9 +18,9 @@ export class HomeService {
     );
   }
 
-  postCloth(cloth: Cloth): Observable<AppResponse> {
+  postCloth(cloth: FormData): Observable<AppResponse> {
     return this.http.post<AppResponse>(
-      `${urlEndpoint.baseUrl}/admin/cloth`,
+      `${urlEndpoint.baseUrl}/admin/cloth/create`,
       cloth
     );
   }

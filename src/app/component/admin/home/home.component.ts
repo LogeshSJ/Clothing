@@ -44,6 +44,7 @@ export class AdminHomeComponent implements OnInit {
   title: string = '';
   description: string = '';
   price: number = 0;
+  categoryId:number=0;
   id: number = 0;
   editState: number = 0;
   buttontxt: string = 'Add';
@@ -97,21 +98,24 @@ export class AdminHomeComponent implements OnInit {
     console.log('going in');
 
     // const id = clothForm.value.id;
-    const description = clothForm.value.description;
-    const price = clothForm.value.price;
-    const title = clothForm.value.title;
-    const category_id = clothForm.value.categoryId;
-    let cloth: Cloth = {
-      description: description,
-      price: price,
-      title: title,
-      category_id: category_id,
-    };
+    const formData = new FormData();
+    formData.append('description', clothForm.value.description);
+    formData.append('price', clothForm.value.price);
+    formData.append('title',clothForm.value.title);
+    formData.append('categoryId',clothForm.value.categoryId);
+    formData.append('photo',this.file);
+    console.log(formData)
+    // let cloth: Cloth = {
+    //   description: description,
+    //   price: price,
+    //   title: title,
+    //   categoryId: category_id,
+    // };
 
     // if (id === 0) {
-      console.log(cloth.id);
+      // console.log(cloth.id);
 
-      this.homeService.postCloth(cloth).subscribe({
+      this.homeService.postCloth(formData).subscribe({
         next: (response: any) => {
           this.cloths = response.data;
           clothForm.resetForm();
@@ -205,6 +209,20 @@ export class AdminHomeComponent implements OnInit {
           console.error('An error occurred:', err);
         },
       });
+    }
+  }
+  Edit(cloth:Cloth){
+  this.title=cloth.title
+  this.description=cloth.description
+  this.price=cloth.price
+  this.categoryId=cloth.categoryId
+
+  }
+  onFileChange(event: any) {
+    const fileInput = event.target;
+    if (fileInput && fileInput.files.length > 0) {
+      this.file = fileInput.files[0];
+      // console.log('Selected file', this.file);
     }
   }
 }

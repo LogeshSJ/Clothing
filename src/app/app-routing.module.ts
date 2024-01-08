@@ -12,7 +12,7 @@ import { AdminHomeComponent } from './component/admin/home/home.component';
 import { AdmincategoryComponent } from './component/admin/admincategory/admincategory.component';
 import { UserComponent } from './component/admin/user/user.component';
 import { AdminOrderComponent } from './component/adminorder/adminorder.component';
-
+import { DashboardComponent } from './component/admin/dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -27,8 +27,8 @@ const routes: Routes = [
   },
   {
     path: 'admincategory',
-    component: AdmincategoryComponent,canActivate:[authGuard]
-
+    component: AdmincategoryComponent,
+    canActivate: [authGuard],
   },
   {
     path: 'adminorder',
@@ -36,7 +36,8 @@ const routes: Routes = [
     canActivate: [authGuard],
   },
   { path: 'address', component: AddressComponent, canActivate: [authGuard] },
-  {path:'user',component:UserComponent,canActivate:[authGuard]}
+  { path: 'user', component: UserComponent, canActivate: [authGuard] },
+  { path: 'adminDashboard', component: DashboardComponent },
 ];
 
 @NgModule({

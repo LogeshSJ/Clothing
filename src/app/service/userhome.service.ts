@@ -16,4 +16,5 @@ export class UserhomeService {
     return this.http.get<AppResponse>(
       `${urlEndpoint.baseUrl}/admin/cloth/all`
     );
-  }}
+  }
+}

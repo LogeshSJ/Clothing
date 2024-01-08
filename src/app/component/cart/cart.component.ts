@@ -52,17 +52,17 @@ import { UserService } from 'src/app/service/user.service';
 //       this.getAllCart();
 //     }
 
-    // getAllCart() {
-    //   let user = this.storageService.getLoggedInUser();
-    //   this.cartService.getAllCart().subscribe(
-    //     (response: AppResponse) => {
-    //       this.cartCloths = response.data;
-    //     },
-    //     (err) => {
-    //       console.error('An error occurred:', err);
-    //     }
-    //   );
-    // }
+// getAllCart() {
+//   let user = this.storageService.getLoggedInUser();
+//   this.cartService.getAllCart().subscribe(
+//     (response: AppResponse) => {
+//       this.cartCloths = response.data;
+//     },
+//     (err) => {
+//       console.error('An error occurred:', err);
+//     }
+//   );
+// }
 
 //     // onSubmit(categoryForm: any) {
 //     //   this.cartService
@@ -131,11 +131,14 @@ export class CartComponent implements OnInit {
   currentOrder: Order | undefined;
   isCartEmpty: boolean = true;
   userDetails: UserDetail[] = [];
+  clothId: string[] = [];
   constructor(
     private cartService: CartService,
     private orderService: OrderService,
     private storageService: StorageService,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
+
   ) {}
 
   ngOnInit(): void {
@@ -147,9 +150,9 @@ export class CartComponent implements OnInit {
       next: (response: any) => {
         this.cartCloths = response.data;
         console.log(response.data);
-        
+
         // console.log(this.cartCloths);
-        
+
         this.isCartEmpty = this.cartCloths.length === 0;
       },
       error: (err) => {
@@ -216,19 +219,28 @@ export class CartComponent implements OnInit {
       console.error('User not logged in.');
       console.log('nope');
     }
+
+    
   }
 
-  deleteCart(id: number | undefined) {
-    if (id != undefined) {
-      this.cartService.deleteCart().subscribe({
+  onDelete(
+    event: Event,
+    userId: number | undefined,
+    clothId: number | undefined
+  ) {
+    event.preventDefault();
+    userId = this.storageService.getLoggedInUser().id;
+    if (userId !== undefined && clothId !== undefined) {
+      this.cartService.deleteCart(userId, clothId).subscribe({
         next: (response: any) => {
           this.cartCloths = response.data;
         },
         error: (err) => {
-          console.error('An error occurred:', err);
+          console.log(err?.error?.error?.message);
         },
       });
     }
   }
-  
+  goBack() {
+  }
 }
