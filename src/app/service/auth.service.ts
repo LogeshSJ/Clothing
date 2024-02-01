@@ -119,9 +119,7 @@ export class AuthService {
   login(login: Login): Observable<AppResponse> {
     return this.http.post<AppResponse>(`${urlEndpoint.baseUrl}/auth/login`, login).pipe(
       map((response) => {
-        const user = response.data as AppUser;
-        this.userSubject.next(window.btoa(login.username + ':' + login.password));
-        this.setLoggedIn(user);
+        this.storageService.setAuthData(window.btoa(login.username + ':' + login.password));
         return response;
       })
     );
@@ -152,7 +150,7 @@ export class AuthService {
       this.router.navigate(['/'], { replaceUrl: true });
     } else if (user.role === CONSTANT.ADMIN) {
       this.isAdminSubject.next(true);
-      this.router.navigate(['/admin'], { replaceUrl: true });
+      this.router.navigate(['/adminDashboard'], { replaceUrl: true });
     }
   }
  

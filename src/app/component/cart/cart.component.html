@@ -1,139 +1,169 @@
 <div class="container my-4">
-  <div class="d-flex justify-content-end mt-3">
-    <button class="btn btn-info px-3 me-2" routerLink="/" (click)="goBack()">
-      Go Back
-    </button>
-  </div>
-  <h3>Your Cart</h3>
-  <br />
+  <button class="btn btn Back" (click)="goBack()">
+    <i class="fa-solid fa-arrow-left">Go Back</i>
+  </button>
+  <h3 class="mb-4 cart">Your Cart</h3>
   <div class="row">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th scope="col">cart id</th>
-          <th scope="col">Image</th>
-          <th scope="col">Title</th>
-          <th scope="col">Description</th>
-          <th scope="col">price</th>
-          <th scope="col">count</th>
-          <th scope="col">Action</th>
-        </tr>
-      </thead>
-      <tbody id="tablebody">
-        <tr *ngFor="let cart of cartCloths">
-          <td>{{ cart.id }}</td>
-          <td>
-            <img
-              src="{{ 'http://localhost:8080/api/cloth/downloadFile/' }}{{
-                cart.cloth.id
-              }}"
-              style="width: 80px; height: 80px"
-            />
-          </td>
-          <td>{{ cart.cloth.title }}</td>
-          <td>{{ cart.cloth.description }}</td>
-          <td>₹ {{ cart.cloth.price * cart.count }}/-</td>
-          <td>{{ cart.count }}</td>
-          <td>
-            <button
-              class="btn btn-info text-white w-50"
-              (click)="onDelete($event, cart?.userId, cart.cloth.id)"
-            >
-              <i class="fas fa-trash-alt"></i>
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="container-fluid d-flex flex-row-reverse w-10">
-      <div class="col-3">
-        <button
-          type="button"
-          class="btn btn-primary px-3 me-2" routerLink="/order"
-           
-        >
-          Checkout
-        </button>
+    <div class="col-md-9">
+      <table class="table table-striped" *ngIf="cartCloths.length !== 0">
+        <thead>
+          <tr>
+            <th scope="col">Image</th>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Price</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Total Price</th>
+            <!-- New column -->
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cart of cartCloths">
+            <td>
+              <img
+                [src]="
+                  'http://localhost:8080/api/cloth/downloadFile/' +
+                  cart.cloth.id
+                "
+                style="width: 80px; height: 80px"
+              />
+            </td>
+            <td>{{ cart.cloth.title }}</td>
+            <td>{{ cart.cloth.description }}</td>
+            <td>₹ {{ cart.cloth.price }}/-</td>
+            <td>{{ cart.count }}</td>
+            <td>₹ {{ cart.cloth.price * cart.count }}/-</td>
+            <td>
+              <button
+                class="btn btn"
+                (click)="onDelete($event, cart?.userId, cart.cloth.id)"
+              >
+                <i class="fa-sharp fa-solid fa-xmark"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-3" *ngIf="cartCloths.length !== 0">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Summary</h5>
+          <hr />
+          <div class="d-flex justify-content-between">
+            <span>Items</span>
+            <span>{{ getTotalItems() }}</span>
+          </div>
+          <div class="d-flex justify-content-between mt-2">
+            <span>Total</span>
+            <span>₹ {{ getTotalPrice() }}/-</span>
+          </div>
+          <hr />
+          <button class="btn btn-primary w-100 mt-3" routerLink="/address">
+            Proceed To Checkout
+          </button>
+        </div>
       </div>
     </div>
+  </div>
+  <div>
+    <h1 *ngIf="cartCloths.length === 0" class="d-flex justify-content-center">
+      Your cart is empty
+    </h1>
   </div>
 </div>
 
-<!-- <br />
-<br />
+<!-- <section class="bg-light my-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-9">
+        <div class="card border shadow-0">
+          <div class="m-4">
+            <h4 class="card-title mb-4">Your shopping cart</h4>
 
-<div class="card">
-  <div class="row">
-    <div class="col-md-8 cart">
-      <div class="title">
-        <div class="row">
-          <div class="col">
-            <h4><b>Shopping Cart</b></h4>
-          </div>
-          <div class="col align-self-center text-right text-muted">3 items</div>
-        </div>
-      </div> -->
-      <!-- Assuming cartCloths is an array of Cart objects -->
-      <!-- <div *ngFor="let cart of cartCloths" class="row border-top border-bottom">
-        <div class="row main align-items-center">
-          <div class="col-2">
-            <img
-              class="img-fluid"
-              [src]="
-                'http://localhost:8080/api/cloth/downloadFile/' + cart.cloth.id
-              "
-            />
-          </div>
-          <div class="col">
-            <div class="row text-muted">{{ cart.cloth.id }}</div>
-            <div class="row">{{ cart.cloth.title }}</div>
-            <div class="row">{{ cart.cloth.description }}</div>
-          </div>
-          <div class="col"> -->
-            <!-- Display count and implement functionality to modify count -->
-            <!-- <a href="#" class="border">{{ cart.count }}</a>
-          </div>
-          <div class="col">
-            &euro; {{ cart.cloth.price * cart.count }}
-            <span
-              class="close"
-              (click)="onDelete($event, cart?.userId, cart.cloth.id)"
-              style="cursor: pointer;"
-              >&#10005;</span
+            <div *ngIf="cartCloths.length === 0" class="text-center">
+              <p style="color: var(--primary-700)">Your cart is empty.</p>
+            </div>
+
+            <div class="row gy-3 mb-4" *ngFor="let cart of cartCloths">
+            
+              <div class="col-lg-5">
+                <div class="me-lg-5">
+                  <div class="d-flex">
+                    <img
+                      [src]="
+                        'http://localhost:8080/api/cloth/downloadFile/' +
+                        cart.cloth.id
+                      "
+                      style="width: 80px; height: 80px"
+                    />
+                    <div class="">
+                      <p class="nav-link" style="color: var(--primary-700)">
+                        {{ cart.cloth.title }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="col-lg-2 col-sm-6 col-6 d-flex flex-row flex-lg-column flex-xl-row text-nowrap"
+              >
+                <div class="d-flex flex-column">
+                  <span class="h6 mb-2" style="color: var(--primary-700)">
+                    Count: {{ cart.count }}
+                  </span>
+                  <span class="text-nowrap">
+                    Price: ₹
+                    <span class="h6" style="color: var(--primary-500)">{{
+                      cart.cloth.price
+                    }}</span>
+                  </span>
+                  Total Price ₹ {{ cart.cloth.price * cart.count }}/-
+                </div>
+              </div>
+              <div
+                class="col-lg col-sm-6 d-flex justify-content-sm-center justify-content-md-start justify-content-lg-center justify-content-xl-end mb-2"
+              >
+                <div class="float-md-end">
+                  <div
+                    class="btn btn-light border icon-hover-danger"
+                    data-bs-toggle="modal"
+                    data-bs-target="#confirmationModal"
+                    style="color: var(--primary-900)"
+                    
+                  >
+                  <button
+                class="btn btn"
+                (click)="onDelete($event, cart?.userId, cart.cloth.id)"
+              >
+                <i class="fas fa-trash-alt"></i>
+              </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <a
+              *ngIf="cartCloths.length > 0"
+              class="btn btn-light border icon-hover-pink"
+              (click)="checkout()"
+              routerLink="/address"
             >
+              Checkout
+            </a>
+          </div>
+
+          <div class="border-top pt-4 mx-4 mb-4">
+            <p>
+              <i class="fas fa-truck text-muted fa-lg"></i> Free Delivery within
+              1-2 weeks
+            </p>
+            <p class="text-muted"></p>
+            
           </div>
         </div>
       </div>
-
-      <div class="back-to-shop">
-        <a href="#">&leftarrow;</a><span class="text-muted" routerLink="">Back to shop</span>
-      </div>
-    </div>
-    <div class="col-md-4 summary">
-      <div>
-        <h5><b>Summary</b></h5>
-      </div>
-      <hr />
-      <div class="row">
-        <div class="col" style="padding-left: 0">ITEMS 3</div>
-        <div class="col text-right">&euro; 132.00</div>
-      </div>
-      <form>
-        <p>SHIPPING</p>
-        <select>
-          <option class="text-muted">Standard-Delivery- &euro;5.00</option>
-        </select>
-        <p>GIVE CODE</p>
-        <input id="code" placeholder="Enter your code" />
-      </form>
-      <div
-        class="row"
-        style="border-top: 1px solid rgba(0, 0, 0, 0.1); padding: 2vh 0"
-      >
-        <div class="col">TOTAL PRICE</div>
-        <div class="col text-right">&euro; 137.00</div>
-      </div>
-      <button class="btn" routerLink="/order">CHECKOUT</button>
     </div>
   </div>
-</div> -->
+</section> -->

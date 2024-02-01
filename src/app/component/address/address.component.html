@@ -1,115 +1,365 @@
-<!-- <p>address works!</p> -->
+<!-- <section class="vh-100">
+  <ng-lottie *ngIf="showAnimation" [options]="options"></ng-lottie>
+  <div class="container mt-3 mx-3 address-card">
+    <div class="container py-5">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="row-md-4 font">
+            <h2 class="display-4 mx-5 fw-bold" style="font-size: 40px">
+              Address Details
+            </h2>
+            <form class="styled-form">
+              <div class="form-field">
+                <label class="form-label" for="username">Address</label>
+                <input
+                  type="text"
+                  id="username"
+                  class="form-input"
+                  name="addressModel.address"
+                  [(ngModel)]="address"
+                  required
+                  #modelAddress="ngModel"
+                  [ngClass]="
+                    modelAddress.invalid && modelAddress.dirty
+                      ? 'is-invalid'
+                      : ''
+                  "
+                />
+                <div *ngIf="modelAddress.invalid" class="invalid-feedback">
+                  Enter a valid address
+                </div>
+              </div>
 
-<section class="vh-100 regpage">
-  <div class="container py-5 h-100">
-    <div class="row d-flex align-items-center justify-content-center h-100">
-      <div class="col-6"></div>
-      <div class="col-6">
-        <h2 class="display-4 text-primary">Address Details</h2>
-        <form (ngSubmit)="createAddress(addressform)" #addressform="ngForm">
-          <div class="form-outline mb-3">
-            <label class="form-label" for="username">Address</label>
-            <input
-              type="text"
-              id="username"
-              class="form-control"
-              name="addressModel.address"
-              [(ngModel)]="address"
-              required
-              #modelAddress="ngModel"
-              [ngClass]="
-              modelAddress.invalid && modelAddress.dirty ? 'is-invalid' : ''
-              "
-            />
-            <div *ngIf="modelAddress.invalid" class="invalid-feedback">
-              Enter valid Adddress name
+              <div class="form-field">
+                <label class="form-label" for="name">Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  class="form-input"
+                  name="addressModel.name"
+                  [(ngModel)]="name"
+                  required
+                  #modelName="ngModel"
+                  [ngClass]="
+                    modelName.invalid && modelName.dirty ? 'is-invalid' : ''
+                  "
+                />
+                <div *ngIf="modelName.invalid" class="invalid-feedback">
+                  Enter a valid name
+                </div>
+              </div>
+
+              <div class="form-field">
+                <label class="form-label" for="name">City</label>
+                <input
+                  type="text"
+                  id="name"
+                  class="form-input"
+                  name="addressModel.city"
+                  [(ngModel)]="city"
+                  required
+                  #modelCity="ngModel"
+                  [ngClass]="
+                    modelCity.invalid && modelCity.dirty ? 'is-invalid' : ''
+                  "
+                />
+                <div *ngIf="modelCity.invalid" class="invalid-feedback">
+                  Enter a valid city name
+                </div>
+              </div>
+
+              <div class="form-field">
+                <label class="form-label" for="password">ZipCode</label>
+                <input
+                  type="number"
+                  id="name"
+                  class="form-input"
+                  name="addressModel.zipcode"
+                  [(ngModel)]="zipcode"
+                  required
+                  #modelZipcode="ngModel"
+                  [ngClass]="
+                    modelZipcode.invalid && modelZipcode.dirty
+                      ? 'is-invalid'
+                      : ''
+                  "
+                />
+                <div *ngIf="modelZipcode.invalid" class="invalid-feedback">
+                  Enter a valid ZipCode
+                </div>
+              </div>
+
+              <div class="form-field">
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  (click)="createAddress()"
+                >
+                  Add
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="container my-4">
+            <div class="card-body font">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">Select</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">City</th>
+                    <th scope="col">ZipCode</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="tablebody">
+                  <tr *ngFor="let add of addresses">
+                    <td>
+                      <input
+                        type="radio"
+                        name="free"
+                        [value]="add.id"
+                        [(ngModel)]="addressid"
+                      />
+                    </td>
+                    <td>{{ add.name }}</td>
+                    <td>{{ add.address }}</td>
+                    <td>{{ add.city }}</td>
+                    <td>{{ add.zipcode }}</td>
+
+                    <td>
+                      <button class="btn btn" (click)="onDelete(add.id)">
+                        <i class="fa-sharp fa-solid fa-xmark"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-          </div>
-
-          <div class="form-outline mb-3">
-            <label class="form-label" for="name">City</label>
-            <input
-              type="text"
-              id="name"
-              class="form-control"
-              name="addressModel.city"
-              [(ngModel)]="city"
-              required
-              #modelCity="ngModel"
-              [ngClass]="
-                modelCity.invalid && modelCity.dirty ? 'is-invalid' : ''
-              "
-            />
-            <div *ngIf="modelCity.invalid" class="invalid-feedback">
-              Enter valid city name
+            <div class="card-footer text-end">
+              <button
+                type="button"
+                class="btn btn-primary"
+                (click)="placeOrder()"
+              >
+                Confirm Order
+              </button>
             </div>
-          </div>
-
-          <div class="form-outline mb-3">
-            <label class="form-label" for="password">ZipCode</label>
-            <input
-              type="text"
-              id="name"
-              class="form-control"
-              name="addressModel.zipcode"
-              [(ngModel)]="zipcode"
-              required
-              #modelZipcode="ngModel"
-              [ngClass]="
-                modelZipcode.invalid && modelZipcode.dirty ? 'is-invalid' : ''
-              "
-            />
-            <div *ngIf="modelZipcode.invalid" class="invalid-feedback">
-              Enter valid ZipCode name
-            </div>
-          </div>
-
-          <div>
-            <button type="submit" class="btn btn-primary w-25" (click)="createAddress(addressform)">Add</button>
-          </div>
-
-          <!-- Submit button -->
-        </form>
-      </div>
-      <div class="container my-4">
-        
-        <br />
-        <div class="row">
-          <table class="table table-warning">
-            <thead>
-              <tr>
-                <th scope="col">address</th>
-                <th scope="col">city</th>
-                <th scope="col">zipcode</th>
-                <!-- <th scope="col"></th> -->
-                <th scope="col">Action</th>
-              </tr>
-            </thead>
-            <tbody id="tablebody">
-              <tr *ngFor="let address of addresses">
-                <td>{{ address.address }}</td>
-                <td>{{ address.city }}</td>
-                <td>{{ address.zipcode }}</td>
-                <td>
-                  <button class="btn btn-info w-25">
-                    <i class="fas fa-pencil-alt"></i> 
-                  </button>
-                </td>
-                <td>
-                  <button class="btn btn-danger text-white w-25" (click)="onDelete(address.id)">
-                    <i class="fas fa-trash-alt"></i> 
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="d-grid gap-2 mb-5">
-            <button type="submit" class="btn btn-primary" routerLink="/order">
-              Place Order
-            </button>
           </div>
         </div>
       </div>
     </div>
   </div>
-</section>
+</section> -->
+
+<button
+  type="button"
+  class="address"
+  data-bs-toggle="modal"
+  data-bs-target="#addressModal"
+>
+  + Add New Address
+</button>
+
+<div class="container-fluid address-table">
+  <ng-lottie *ngIf="showAnimation" [options]="options"></ng-lottie>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="container my-4">
+        <div class="card-body font">
+          <table class="table table-hover container">
+            <thead>
+              <tr>
+                <th scope="col">Select</th>
+                <th scope="col">Name</th>
+                <th scope="col">Address</th>
+                <th scope="col">City</th>
+                <th scope="col">ZipCode</th>
+                <th scope="col">phonenumber</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody id="tablebody">
+              <tr *ngFor="let add of addresses">
+                <td>
+                  <input
+                    type="radio"
+                    name="free"
+                    [value]="add.id"
+                    [(ngModel)]="addressid"
+                  />
+                </td>
+                <td>{{ add.name }}</td>
+                <td>{{ add.address }}</td>
+                <td>{{ add.city }}</td>
+                <td>{{ add.zipcode }}</td>
+                <td>{{ add.phoneNumber }}</td>
+                <td>
+                  <button class="btn" (click)="onDelete(add.id)">
+                    <i class="fa-sharp fa-solid fa-xmark"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-footer text-end">
+          <button type="button" class="btn btn-primary" (click)="placeOrder()">
+            Confirm Order
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div
+        class="modal fade"
+        id="addressModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="addressModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="addressModalLabel">
+                Address Details
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <form class="styled-form">
+                <div class="form-field">
+                  <label class="form-label" for="username">Address</label>
+                  <input
+                    type="text"
+                    id="username"
+                    class="form-input"
+                    name="addressModel.address"
+                    [(ngModel)]="address"
+                    required
+                    #modelAddress="ngModel"
+                    [ngClass]="
+                      modelAddress.invalid && modelAddress.dirty
+                        ? 'is-invalid'
+                        : ''
+                    "
+                  />
+                  <div *ngIf="modelAddress.invalid" class="invalid-feedback">
+                    Enter a valid address
+                  </div>
+                </div>
+
+                <div class="form-field">
+                  <label class="form-label" for="name">Name</label>
+                  <input
+                    type="text"
+                    id="name"
+                    class="form-input"
+                    name="addressModel.name"
+                    [(ngModel)]="name"
+                    required
+                    #modelName="ngModel"
+                    [ngClass]="
+                      modelName.invalid && modelName.dirty ? 'is-invalid' : ''
+                    "
+                  />
+                  <div *ngIf="modelName.invalid" class="invalid-feedback">
+                    Enter a valid name
+                  </div>
+                </div>
+
+                <div class="form-field">
+                  <label class="form-label" for="name">Phone number</label>
+                  <input
+                    type="text"
+                    id="phonenumber"
+                    class="form-input"
+                    name="addressModel.phoneNumber"
+                    [(ngModel)]="phoneNumber"
+                    required
+                    #modelphoneNumber="ngModel"
+                    [ngClass]="
+                      modelphoneNumber.invalid && modelphoneNumber.dirty
+                        ? 'is-invalid'
+                        : ''
+                    "
+                  />
+                  <div
+                    *ngIf="modelphoneNumber.invalid"
+                    class="invalid-feedback"
+                  >
+                    Enter a valid phonenumber
+                  </div>
+                </div>
+
+                <div class="form-field">
+                  <label class="form-label" for="name">City</label>
+                  <input
+                    type="text"
+                    id="name"
+                    class="form-input"
+                    name="addressModel.city"
+                    [(ngModel)]="city"
+                    required
+                    #modelCity="ngModel"
+                    [ngClass]="
+                      modelCity.invalid && modelCity.dirty ? 'is-invalid' : ''
+                    "
+                  />
+                  <div *ngIf="modelCity.invalid" class="invalid-feedback">
+                    Enter a valid city name
+                  </div>
+                </div>
+
+                <div class="form-field">
+                  <label class="form-label" for="password">ZipCode</label>
+                  <input
+                    type="number"
+                    id="name"
+                    class="form-input"
+                    name="addressModel.zipcode"
+                    [(ngModel)]="zipcode"
+                    required
+                    #modelZipcode="ngModel"
+                    [ngClass]="
+                      modelZipcode.invalid && modelZipcode.dirty
+                        ? 'is-invalid'
+                        : ''
+                    "
+                  />
+                  <div *ngIf="modelZipcode.invalid" class="invalid-feedback">
+                    Enter a valid ZipCode
+                  </div>
+                </div>
+
+                <div class="form-field">
+                  <button
+                    type="submit"
+                    class="btn btn-primary"
+                    style="border: 4px"
+                    data-bs-dismiss="modal"
+                    (click)="createAddress()"
+                  >
+                    Add
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Modal -->
+    </div>
+  </div>
+</div>

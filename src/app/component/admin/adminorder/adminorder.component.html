@@ -1,0 +1,129 @@
+<!-- <div class="admin-page">
+  <div class="orders-section">
+    <h2>All Orders</h2>
+    <button class="btn btn-success" (click)="getAllOrders()">
+      Get All Orders
+    </button>
+    <br /><br />
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Order Id</th>
+          <th scope="col">Name</th>
+          <th scope="col">User ID</th>
+
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+      <tbody id="table">
+        <tr *ngFor="let order of orders">
+          <td>{{ order.id }}</td>
+          <td>{{ order.username }}</td>
+          <td>{{ order.userId }}</td>
+          <td>{{ order.orderStatus }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="update-status-section">
+    <h2>Update Order Status</h2>
+    <table>
+      <tr>
+        <td><label for="orderId">Enter Order ID:</label></td>
+        <td>
+          <input type="number" class="form-control" [(ngModel)]="orderId" />
+        </td>
+      </tr>
+      <br />
+      <tr>
+        <td><label for="statusId">Enter Status ID:</label></td>
+        <td>
+          <input type="number" class="form-control" [(ngModel)]="statusId" />
+        </td>
+      </tr>
+      <br />
+      <tr>
+        <td colspan="2">
+          <button class="btn btn-success" (click)="updateOrderStatus()">
+            Update Order Status
+          </button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div> -->
+
+<div class="admin-page">
+  <div class="orders-section">
+    <h2>All Orders</h2>
+    <button class="btn btn-success" (click)="getAllOrders()">
+      Get All Orders
+    </button>
+    <br /><br />
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Order Id</th>
+          <th scope="col">Name</th>
+          <th scope="col">User ID</th>
+          <th scope="col">Product Name</th>
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+      <!-- <tbody id="table" >
+        <tr *ngFor="let order of orders" (click)="selectUserOrder(order)">
+          
+          <td>{{ order.id }}</td>
+          <td>{{ order.username }}</td>
+          <td>{{ order.userId }}</td>
+          <td>{{ order.cloth }}</td> 
+          <td>{{ order.orderStatus }}</td>
+        </tr>
+      </tbody> -->
+      <tbody id="table">
+        <tr *ngFor="let order of userOrders">
+          <td>{{ order.id }}</td>
+          <td>{{ order.username }}</td>
+          <td>{{ order.userId }}</td>
+          <td>
+            <ul>
+              <li *ngFor="let product of order.clothList">
+                {{ product.title }}
+              </li>
+            </ul>
+          </td>
+          <td>{{ order.orderStatus }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="update-status-section">
+    <h2>Update Order Status</h2>
+    <table>
+      <tr>
+        <td><label for="orderId">Enter Order ID:</label></td>
+        <td>
+          <input type="number" class="form-control" [(ngModel)]="orderId" />
+        </td>
+      </tr>
+      <br />
+      <tr>
+        <td><label for="statusId">Enter Status ID:</label></td>
+        <td>
+          <input type="number" class="form-control" [(ngModel)]="statusId" />
+        </td>
+      </tr>
+      <br />
+      <tr>
+        <td colspan="2">
+          <button class="btn btn-success" (click)="updateOrderStatus()">
+            Update Order Status
+          </button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppResponse } from 'src/app/model/appResponse';
+import { Home } from 'src/app/model/home';
 import { Order } from 'src/app/model/order';
 import { OrderService } from 'src/app/service/order.service';
 import { StorageService } from 'src/app/service/storage.service';
@@ -11,7 +12,7 @@ import { StorageService } from 'src/app/service/storage.service';
 })
 export class OrderComponent implements OnInit {
 
-  
+  fliteredCloths: Home[] = [];
   constructor(private orderService: OrderService,private storageService:StorageService) {}
  
   orderItems: Order[] = [];
@@ -32,6 +33,8 @@ export class OrderComponent implements OnInit {
       next: (response: AppResponse) => {
         if (response && response.data) {
           this.orderItems = response.data;
+          console.log(this.orderItems);
+          
         } else {
           console.error('Invalid API response format:', response);
         }
@@ -43,22 +46,22 @@ export class OrderComponent implements OnInit {
     });
   }
  
-  createOrder() {
-    console.log('dasda');
+  // createOrder() {
+  //   console.log('dasda');
  
-    this.orderService.postOrder(this.orderModel).subscribe({
-      next: (response: AppResponse) => {
-        if (response && response.data) {
-          this.orderItems = response.data;
-          this.orderModel = { ...this.INITIAL_ORDER };
-          let userId: any = this.storageService.getLoggedInUser().id;
-          this.getAllOrders(userId);
-          // console.log(response.data, 'asasas');
-        }
-      },
-      error: (err) => {
-        console.error('An error occurred:', err);
-      },
-    });
-  }
+  //   this.orderService.postOrder(this.orderModel).subscribe({
+  //     next: (response: AppResponse) => {
+  //       if (response && response.data) {
+  //         this.orderItems = response.data;
+  //         this.orderModel = { ...this.INITIAL_ORDER };
+  //         let userId: any = this.storageService.getLoggedInUser().id;
+  //         this.getAllOrders(userId);
+  //         // console.log(response.data, 'asasas');
+  //       }
+  //     },
+  //     error: (err) => {
+  //       console.error('An error occurred:', err);
+  //     },
+  //   });
+  // }
 }

@@ -14,7 +14,7 @@ export class UserhomeService {
 
   getuserhome(): Observable<AppResponse> {
     return this.http.get<AppResponse>(
-      `${urlEndpoint.baseUrl}/admin/cloth/all`
+      `${urlEndpoint.baseUrl}/cloth/all`
     );
   }
 }

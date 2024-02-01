@@ -2,83 +2,106 @@
   <router-outlet />
 </div>
 
-<div *ngIf="isLoggedIn" class="container-fluid vh-100 d-flex flex-column">
-  <div class="row">
+<div *ngIf="isLoggedIn" class="container-fluid vh-100 d-flex flex-column p-0">
+  <div *ngIf="!isAdmin" class="row">
     <header class="navbar sticky-top bg-primary p-2 shadow">
       <div>
-        <a class="navbar-brand px-3 text-white" routerLink="/"
+        <a class="navbar-brand px-3 text-white lora" routerLink="/"
           >Lora Fashion👚</a
         >
       </div>
       <div class="d-flex justify-content-end">
         <div class="navbar-nav px-4 text-white" routerLink="/cart">
-          <i class="fa-solid fa-cart-plus text-white"></i>
+          <i class="fa-solid fa-cart-plus text-white" role="button"> Cart</i>
         </div>
         <div class="navbar-nav px-4 text-white" routerLink="/order">
-          <i class="fa-solid fa-truck text-white"></i>
+          <i class="fa-solid fa-truck text-white" role="button"> Orders</i>
         </div>
         <div
           class="navbar-nav px-4 text-white d-flex justify-content-end"
           (click)="logout()"
           role="button"
         >
-          <i class="fa-solid fa-solid fa-right-from-bracket text-white"></i>
+          <i class="fa-solid fa-solid fa-right-from-bracket text-white"> Logout</i>
         </div>
       </div>
     </header>
+    <main><router-outlet></router-outlet></main>
   </div>
-  <div *ngIf="isAdmin" class="row flex-grow-1">
-    <div class="sidebar border border-right col-2 p-0">
-      <div class="bg-body-tertiary h-100" tabindex="-1">
-        <div class="d-flex flex-column p-0 pt-3 overflow-y-auto">
-          <ul class="nav flex-column">
-            <li class="nav-item d-flex align-items-center px-4 sideBarItem">
-              <i class="fa-solid fa-house"></i>
-              <a
-                class="nav-link d-flex align-items-center"
-                routerLink="/adminDashboard"
-              >
-                Dashboard
-              </a>
-            </li>
-            <li class="nav-item d-flex align-items-center px-4 sideBarActive">
-              <i class="fa-solid fa-book"></i>
-              <a class="nav-link d-flex align-items-center" routerLink="/admin"
-                >Products
-              </a>
-            </li>
-            <li class="nav-item d-flex align-items-center px-4 sideBarActive">
-              <i class="fa-solid fa-book"></i>
-              <a
-                class="nav-link d-flex align-items-center"
-                routerLink="/admincategory"
-                >Categories
-              </a>
-            </li>
-            <li class="nav-item d-flex align-items-center px-4 sideBarItem">
-              <i class="fa-solid fa-user"></i>
-              <a class="nav-link d-flex align-items-center" routerLink="/user"
-                >Users</a
-              >
-            </li>
-            <li class="nav-item d-flex align-items-center px-4 sideBarItem">
-              <i class="fa-solid fa-clock-rotate-left"></i>
-              <a
-                class="nav-link d-flex align-items-center"
-                routerLink="/adminorder"
-                >Orders
-              </a>
-            </li>
-          </ul>
+
+ <!-- admin nav bar -->
+
+  <div *ngIf="isAdmin">
+    <header class="navbar sticky-top bg-primary p-2 shadow">
+      <div>
+        <a class="navbar-brand px-3 text-white lora" routerLink="/adminDashboard"
+          >Lora Fashion👚</a
+        >
+      </div>
+      <div class="d-flex justify-content-end">
+        <div
+          class="navbar-nav px-4 text-white d-flex justify-content-end"
+          (click)="logout()"
+          role="button"
+        >
+          <i class="fa-solid fa-solid fa-right-from-bracket text-white">Logout</i>
         </div>
       </div>
+    </header>
+<div *ngIf="isAdmin" class="row flex-grow-1">
+  <div class="sidebar border border-right col-2 p-0 mb-2">
+    <div class="bg-body-tertiary h-100" tabindex="-1">
+      <div class="d-flex flex-column p-0 pt-3 overflow-y-auto">
+        <ul class="nav flex-column">
+          <li class="nav-item d-flex align-items-center px-4 sideBarItem">
+            <i class="fa-solid fa-house"></i>
+            <a
+              class="nav-link d-flex align-items-center"
+              routerLink="/adminDashboard"
+            >
+              Dashboard
+            </a>
+          </li>
+          <li class="nav-item d-flex align-items-center px-4 sideBarActive">
+            <i class="fa-solid fa-book"></i>
+            <a class="nav-link d-flex align-items-center" routerLink="admin/Product"
+              >Products
+            </a>
+          </li>
+          <li class="nav-item d-flex align-items-center px-4 sideBarActive">
+            <i class="fa-solid fa-book"></i>
+            <a
+              class="nav-link d-flex align-items-center"
+              routerLink="admin/category"
+              >Categories
+            </a>
+          </li>
+          <li class="nav-item d-flex align-items-center px-4 sideBarItem">
+            <i class="fa-solid fa-user"></i>
+            <a class="nav-link d-flex align-items-center" routerLink="admin/user"
+              >Users</a
+            >
+          </li>
+          <li class="nav-item d-flex align-items-center px-4 sideBarItem">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            <a
+              class="nav-link d-flex align-items-center"
+              routerLink="admin/order"
+              >Orders
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
-    <main class="col-10 px-4">
-      <router-outlet></router-outlet>
-    </main>
   </div>
-  <div *ngIf="!isAdmin">
+  <main class="col-10 px-4">
     <router-outlet></router-outlet>
+  </main>
+</div>
+
+
+  
+    
   </div>
 </div>
 

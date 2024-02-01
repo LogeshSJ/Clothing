@@ -1,65 +1,11 @@
-<!-- <form (ngSubmit)="(form)" #form="ngForm">
-  <div class="d-flex justify-content-between align-items-center mt mt-5">
-    <h1 Style="font-family: 'Times New Roman';">Category :</h1>
-    <button
-      type="button"
-      class="btn btn-success text-white"
-      data-bs-toggle="modal"
-      data-bs-target="#exampleModal"
-      data-bs-whatever="@mdo"
-    >
-      + AddCategory
-    </button>
-  </div>
-  <div
-    class="modal fade"
-    id="exampleModal"
-    tabindex="-1"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Add Category</h1>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="mb-3">
-              <label for="recipient-name" class="col-form-label"
-                >Category</label
-              >
-              <input type="text" class="form-control" id="recipient-name" />
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >
-            Close
-          </button>
-          <button type="button" class="btn btn-success text-dark">Add</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</form> -->
+
 
 <div class="container mt-5">
-  <div class="d-flex justify-content-between align-items-center mt-5">
-    <h1 style="font-family: 'Times New Roman'">Category:</h1>
+  <div class="page-header">
+    <h1>Category</h1>
     <button
       type="button"
-      class="btn btn-success text-white"
+      class="btn btn-success text-white btn-add-category"
       data-bs-toggle="modal"
       data-bs-target="#exampleModal"
       data-bs-whatever="@mdo"
@@ -68,13 +14,9 @@
     </button>
   </div>
 
-  <div
-    class="modal fade"
-    id="exampleModal"
-    tabindex="-1"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-  >
+    <!-- Add Category Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -115,10 +57,8 @@
     </div>
   </div>
 
-  <div class="container mt-5">
-    <br />
-    <br />
-    <table class="table table-bordered text-center">
+  <div class="table-container">
+    <table class="table table-bordered text-center table-hover">
       <thead class="thead-dark">
         <tr class="table-warning">
           <th>S.No</th>
@@ -132,17 +72,14 @@
           <td>{{ category.id }}</td>
           <td>{{ category.title }}</td>
           <td>
-            <button class="btn btn-info w-25" (click)="onEdit(category)" data-bs-toggle="modal"
+            <button class="btn btn btn-edit" (click)="onEdit(category)" data-bs-toggle="modal"
             data-bs-target="#exampleModal"
             data-bs-whatever="@mdo">
               <i class="fas fa-pencil-alt"></i> 
             </button>
           </td>
           <td>
-            <button
-              class="btn btn-danger text-white w-25"
-              (click)="onDelete(category.id)"
-            >
+            <button class="btn btn-danger text-white btn-delete" (click)="onDelete(category.id)">
               <i class="fas fa-trash-alt"></i> 
             </button>
           </td>

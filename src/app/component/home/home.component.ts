@@ -37,6 +37,7 @@ export class HomeComponent {
         if (response && response.data) {
           this.homes = response.data;
           this.totalProducts = response.data;
+          this.fliteredCloths=response.data
           console.log(this.homes);
         } else {
           console.error('Invalid API response format:', response);
@@ -87,13 +88,11 @@ export class HomeComponent {
   // }
 
   onSearch() {
-    if (this.searchQuery.trim() !== '') {
-      this.fliteredCloths = this.homes.filter((home: Home) =>
+   
+      this.fliteredCloths = this.homes.filter((home) =>
         home.title.toLowerCase().includes(this.searchQuery.toLowerCase())
       );
-    } else {
-      this.fliteredCloths = this.homes; // Show all items when search query is empty
-    }
+    
   }
 
   // filterArray() {

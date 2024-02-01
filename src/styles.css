@@ -3,8 +3,8 @@
 :root {
   --primary-50: rgb(235, 243, 243);
   --primary-100: #FBF8BE;
-  --primary-300: #234E70;
-  --primary-500: #234f70;
+  --primary-300: #141d24;
+  --primary-500: #141d24;
   --primary-600: #234E70;
   --primary-700: #b45309;
   --primary-900: #78350f;
@@ -99,7 +99,7 @@ body {
 
 /* background color */
 .bg-body-tertiary {
-  background-color: var(--primary-100) !important;
+  background-color: var(--primary-600) !important;
 }
 
 /* Custom */
@@ -120,7 +120,7 @@ body {
 .sideBarActive > a:hover,
 .sideBarActive > a:active {
   color: var(--primary-500);
-  background-color: var(--primary-50) !important;
+  background-color: var() !important;
   padding: 8px;
 }
 
@@ -184,6 +184,7 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  object-fit:cover;
 }
 .regpage{
   background-image: url("/assets/images/bg6.jpg");

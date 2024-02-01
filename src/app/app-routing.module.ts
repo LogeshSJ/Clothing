@@ -11,14 +11,18 @@ import { AddressComponent } from './component/address/address.component';
 import { AdminHomeComponent } from './component/admin/home/home.component';
 import { AdmincategoryComponent } from './component/admin/admincategory/admincategory.component';
 import { UserComponent } from './component/admin/user/user.component';
-import { AdminOrderComponent } from './component/adminorder/adminorder.component';
+import { AdminOrderComponent } from './component/admin/adminorder/adminorder.component';
 import { DashboardComponent } from './component/admin/dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: '', component: HomeComponent, canActivate: [authGuard] },
-  { path: 'admin', component: AdminHomeComponent, canActivate: [authGuard] },
+  {
+    path: 'admin/Product',
+    component: AdminHomeComponent,
+    canActivate: [authGuard],
+  },
   { path: 'cart', component: CartComponent, canActivate: [authGuard] },
   {
     path: 'order',
@@ -26,17 +30,17 @@ const routes: Routes = [
     canActivate: [authGuard],
   },
   {
-    path: 'admincategory',
+    path: 'admin/category',
     component: AdmincategoryComponent,
     canActivate: [authGuard],
   },
   {
-    path: 'adminorder',
+    path: 'admin/order',
     component: AdminOrderComponent,
     canActivate: [authGuard],
   },
   { path: 'address', component: AddressComponent, canActivate: [authGuard] },
-  { path: 'user', component: UserComponent, canActivate: [authGuard] },
+  { path: 'admin/user', component: UserComponent, canActivate: [authGuard] },
   { path: 'adminDashboard', component: DashboardComponent },
 ];
 

@@ -19,7 +19,7 @@ import { OrderComponent } from './component/order/order.component';
 import { AdmincategoryComponent } from './component/admin/admincategory/admincategory.component';
 import { AddressComponent } from './component/address/address.component';
 import { UserComponent } from './component/admin/user/user.component';
-import { AdminOrderComponent } from './component/adminorder/adminorder.component';
+import { AdminOrderComponent } from './component/admin/adminorder/adminorder.component';
 import { DashboardComponent } from './component/admin/dashboard/dashboard.component';
 
 

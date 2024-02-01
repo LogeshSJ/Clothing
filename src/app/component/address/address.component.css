@@ -1,0 +1,162 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+.gradient-custom {
+  background: -webkit-linear-gradient(left, #3931af, #00c6ff);
+}
+
+.card-custom {
+  border-bottom-left-radius: 10% 50%;
+  border-top-left-radius: 10% 50%;
+  background-color: #f8f9fa;
+}
+
+.address-card {
+  background: -webkit-linear-gradient(left, #f2f2f3, #4a859600);
+}
+
+.input-custom {
+  background-color: white;
+}
+
+.white-text {
+  color: hsl(52, 0%, 98%);
+  font-weight: 100;
+  font-size: 14px;
+}
+
+.back-button {
+  background-color: hsl(52, 0%, 98%);
+  font-weight: 700;
+  color: black;
+  margin-top: 50px;
+}
+
+/* Custom styling for the address page */
+section.vh-100 {
+  background-color: #f8f9fa;
+}
+
+.container.my-4 {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.table.table-warning {
+  background-color: #fff;
+}
+
+/* Styling for the right column address details table */
+/* .address-table-container {
+    overflow: auto;
+    max-height: 400px;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+  }
+
+  .table.table-address {
+    border-radius: 8px;
+  }
+
+  .table.table-address thead th {
+    background-color: #007bff;
+    color: #fff;
+  }
+
+  .table.table-address tbody td,
+  .table.table-address tbody th {
+    border: 1px solid #dee2e6;
+    padding: 8px;
+  }
+
+  .table.table-address tbody tr:hover {
+    background-color: #f5f5f5;
+  } */
+
+/* Custom styling for buttons */
+.btn-primary {
+  background-color: #1a518d;
+  border-color: #1a518d;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+  border-color: #c82333;
+}
+
+.styled-form {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.form-field {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.form-input {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.btn-primary {
+  background-color: #1a518d;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.is-invalid {
+  border-color: #dc3545 !important;
+}
+
+.invalid-feedback {
+  color: #dc3545;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.font{
+  font-family: 'Poppins', sans-serif;
+}
+
+.address{
+  height: 50px;
+  border-radius: 10px;
+  background-color: black;
+  color: white;
+  margin-top: 35px;
+  margin-left: 85%;
+}
+
+.address-table{
+  margin-left: 25%;
+}
+

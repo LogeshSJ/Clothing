@@ -19,5 +19,9 @@ export class OrderService {
     return this.http.get<AppResponse>(`${urlEndpoint.baseUrl}/order/${userId}`);
   }
   
+  // updateOrderStatus(orderId: number, statusId: number): Observable<AppResponse> {
+  //   const data = { orderId, statusId };
+  //   return this.http.put<AppResponse>(`${urlEndpoint.baseUrl}/admin/order/status`, data);
+  // }
   
 }

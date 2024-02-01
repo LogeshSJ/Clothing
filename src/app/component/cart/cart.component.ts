@@ -162,16 +162,16 @@ export class CartComponent implements OnInit {
     });
   }
 
-  loadUserDetails() {
+  loadUserDetails() { 
     const userId = this.storageService.getLoggedInUser().id;
-
     this.userService.getUserDetails().subscribe(
       (response: AppResponse) => {
         if (response && response.data && Array.isArray(response.data)) {
           const userWithAddress = response.data.find(
             (user) => user.addressList && user.addressList.length > 0
           );
-
+              console.log(response);
+              
           if (userWithAddress) {
             const firstAddress = userWithAddress.addressList[0].id;
             console.log(firstAddress);
@@ -241,6 +241,17 @@ export class CartComponent implements OnInit {
       });
     }
   }
-  goBack() {
+  goBack(): void {
+    // You can define the route to navigate back to, for instance:
+    this.router.navigate(['/']); // Change '/' to the desired route
+  }
+  getTotalItems(): number {
+    return this.cartCloths.reduce((total, cart) => total + cart.count, 0);
+  }
+  getTotalPrice(): number {
+    return this.cartCloths.reduce(
+      (total, cart) => total + cart.cloth.price * cart.count,
+      0
+    );
   }
 }

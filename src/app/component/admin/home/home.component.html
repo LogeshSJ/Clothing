@@ -1,6 +1,4 @@
-<!-- <p>home works!</p> -->
-
-<div class="d-flex justify-content-between align-items-center mt mt-5">
+<!-- <div class="d-flex justify-content-between align-items-center mt mt-5">
   <h1 Style="font-family: 'Times New Roman';">Products :</h1>
   <button
     type="button"
@@ -32,16 +30,6 @@
       </div>
       <div class="modal-body">
         <form (ngSubmit)="onSubmit(clothForm)" #clothForm="ngForm">
-          <!-- <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">id</label>
-            <input
-              type="text"
-              class="form-control"
-              name="id"
-              ngModel
-              id="recipient-name"
-            />
-          </div> -->
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Title</label>
             <input
@@ -87,7 +75,9 @@
             />
           </div>
           <div class="form-outline mb-3">
-            <label class="form-label" for="customFile" style="font-size: large">Choose Image</label>
+            <label class="form-label" for="customFile" style="font-size: large"
+              >Choose Image</label
+            >
             <input
               type="file"
               class="form-control input-file"
@@ -95,24 +85,9 @@
               ngModel
               name="photo"
               (change)="onFileChange($event)"
-            /></div>
-          <!-- <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">count</label>
-            <input type="text" class="form-control" id="recipient-name" />
-          </div> -->
-          <!-- <div class="form-group mb-2">
-            <label class="control-label mb-2" for="filebutton">Image</label>
-            <div class="col-6">
-              <input
-                id="filebutton"
-                name="image"
-                class="input-file"
-                type="file"
-                ngModel
-                (change)="onFileChange($event)"
-              />
-            </div>
-          </div> -->
+            />
+          </div>
+
           <div class="modal-footer">
             <button
               type="button"
@@ -157,7 +132,6 @@
             data-bs-toggle="modal"
             data-bs-target="#exampleModal"
             data-bs-whatever="@mdo"
-            
           >
             <i (click)="Edit(home)" class="fas fa-pencil-alt"></i>
           </button>
@@ -170,4 +144,153 @@
       </tr>
     </tbody>
   </table>
+</div> -->
+
+
+<div class="container mt-5">
+  <div class="page-header">
+    <h1>Products</h1>
+    <button
+      type="button"
+      class="btn btn-success text-white btn-add-products"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal"
+      data-bs-whatever="@mdo"
+    >
+      + Add Products
+    </button>
+  </div>
+
+  <!-- Add Products Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Add Products</h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="onSubmit(clothForm)" #clothForm="ngForm">
+            <div class="mb-3">
+              <label for="recipient-name" class="col-form-label">Title</label>
+              <input
+                type="text"
+                class="form-control"
+                name="title"
+                [(ngModel)]="title"
+                id="recipient-name"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="recipient-name" class="col-form-label"
+                >description</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="recipient-name"
+                name="description"
+                [(ngModel)]="description"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="recipient-name" class="col-form-label">price</label>
+              <input
+                type="number"
+                class="form-control"
+                name="price"
+                [(ngModel)]="price"
+                id="recipient-name"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="recipient-name" class="col-form-label"
+                >CategoryId</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                name="categoryId"
+                [(ngModel)]="categoryId"
+                id="recipient-name"
+              />
+            </div>
+            <div class="form-outline mb-3">
+              <label class="form-label" for="customFile" style="font-size: large"
+                >Choose Image</label
+              >
+              <input
+                type="file"
+                class="form-control input-file"
+                id="customFile"
+                ngModel
+                name="photo"
+                (change)="onFileChange($event)"
+              />
+            </div>
+  
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="submit" class="btn btn-success text-dark">
+                {{ buttontxt }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- ... (unchanged) ... -->
+  </div>
+
+  <!-- Products Table -->
+  <div class="table-container">
+    <table class="table table-bordered text-center table-hover">
+      <thead class="thead-dark">
+        <tr class="table-warning">
+          <th>Id</th>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of cloths">
+          <td>{{ product.id }}</td>
+          <td>{{ product.title }}</td>
+          <td>{{ product.description }}</td>
+          <td>₹ {{ product.price }}</td>
+          <td>
+            <button
+              class="btn btn btn-edit"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+              data-bs-whatever="@mdo"
+              (click)="Edit(product)"
+            >
+              <i class="fas fa-pencil-alt"></i>
+            </button>
+          </td>
+          <td>
+            <button class="btn btn-danger text-white btn-delete" (click)="onDelete(product.id)">
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
+
