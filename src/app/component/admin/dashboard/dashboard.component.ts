@@ -14,7 +14,7 @@ export class DashboardComponent implements OnInit {
   totalCloth = 0;
   constructor(
     private userService: UserService,
-    private userHomeService: UserhomeService
+    private userHomeService : UserhomeService
   ) {}
 
   ngOnInit(): void {
